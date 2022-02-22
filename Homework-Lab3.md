@@ -21,7 +21,7 @@ Tạo bảng Đọc giả `users`
 ```roomsql
 CREATE TABLE users(
 id INT NOT NULL PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
+full_name VARCHAR(255) NOT NULL,
 date_of_birth DATE NOT NULL,
 mobile VARCHAR(11) NOT NULL,
 email VARCHAR(255) NULL,
@@ -34,7 +34,7 @@ Tạo bảng Nhân viên `staffs`
 ```roomsql
 CREATE TABLE staffs(
 id INT NOT NULL PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
+full_name VARCHAR(255) NOT NULL,
 date_of_birth DATE NOT NULL,
 mobile VARCHAR(11) NOT NULL,
 address TEXT NOT NULL,
@@ -53,7 +53,7 @@ Tạo bảng Tác giả `authors`
 ```roomsql
 CREATE TABLE authors(
 id INT NOT NULL PRIMARY KEY,
-name VARCHAR(255) NOT NULL,
+full_name VARCHAR(255) NOT NULL,
 birth_year YEAR NOT NULL,
 dead_year YEAR NULL,
 mobile VARCHAR(11) NOT NULL,
@@ -70,9 +70,11 @@ id INT NOT NULL PRIMARY KEY,
 title VARCHAR(255) NOT NULL,
 publishYear YEAR NOT NULL,
 content TEXT NOT NULL,
+id_company INT NOT NULL,
 id_language INT NOT NULL,
 pages INT NOT NULL,
-FOREIGN KEY (id_language) REFERENCES language(id)
+FOREIGN KEY (id_language) REFERENCES language(id),
+FOREIGN KEY (id_company) REFERENCES company(id)
 )
 ```  
 Tạo bảng `book_author`  
@@ -93,16 +95,6 @@ id_category INT NOT NULL,
 PRIMARY KEY (id_book,id_category),
 FOREIGN KEY (id_book) REFERENCES books(id),
 FOREIGN KEY (id_category) REFERENCES category(id)
-)
-```  
-Tạo bảng `book_company`  
-```roomsql
-CREATE TABLE book_company(
-id_book INT NOT NULL,
-id_company INT NOT NULL,
-PRIMARY KEY (id_book,id_company),
-FOREIGN KEY (id_book) REFERENCES books(id),
-FOREIGN KEY (id_company) REFERENCES company(id)
 )
 ```
 Tạo bảng Phiếu mượn sách `borrowed_notes`  
@@ -150,29 +142,27 @@ FOREIGN KEY(id_returnNote) REFERENCES return_notes(id)
 )
 ```  
 ###Kết quả liên kết  
-![image](https://user-images.githubusercontent.com/95077178/155095299-6903a358-f84d-495a-ab92-fa9308a7f29e.png)  
+![image](https://user-images.githubusercontent.com/95077178/155182030-6f008f34-2bfa-42c6-b662-c784f0a26ef9.png)  
 ###Thêm dữ liệu vào DATABASE  
 Thêm dữ liệu vào bảng `users`  
-![image](https://user-images.githubusercontent.com/95077178/155097461-c9ef8a51-1efe-40fd-81a0-4508579b88a6.png)
+![image](https://user-images.githubusercontent.com/95077178/155182419-b6b7086c-16d9-4ca0-99b5-803b0b173507.png)
 Thêm dữ liệu vào bảng `staff`  
-![image](https://user-images.githubusercontent.com/95077178/155106394-193bec0e-a6c9-4e2e-a300-7f73d72ef692.png)  
+![image](https://user-images.githubusercontent.com/95077178/155182658-e680cf5c-5a23-463c-8d13-5665af66d946.png)  
 Thêm dữ liệu vào bảng `language`  
 ![image](https://user-images.githubusercontent.com/95077178/155106510-8fdb4f58-f113-41a1-9e1d-62fb6a9e2b56.png)  
 Thêm dữ liệu vào bảng `company`  
-![image](https://user-images.githubusercontent.com/95077178/155106613-d5162d26-d062-4b25-812e-87bc36e0f814.png)  
+![image](https://user-images.githubusercontent.com/95077178/155183019-65a82dc3-307b-4be4-b249-39fea5347f4f.png)  
 Thêm dữ liệu vào bảng `category`  
 ![image](https://user-images.githubusercontent.com/95077178/155106757-27aa2a1f-16b5-4d75-a594-a9b677586a71.png)  
 Thêm dữ liêu vào bảng `authors`  
-![image](https://user-images.githubusercontent.com/95077178/155106863-90afd269-5f7d-4f16-961b-2d6e9c7572a9.png)  
+![image](https://user-images.githubusercontent.com/95077178/155183196-ca64ebce-4dda-4613-b939-7ac38eaa3319.png)  
 Thêm dữ liêu vào bảng `books`  
-![image](https://user-images.githubusercontent.com/95077178/155106978-94910d78-6ba0-4dfa-9bb1-f70c88dc8453.png)  
+![image](https://user-images.githubusercontent.com/95077178/155184339-8f8d5578-3100-4788-aee6-ce606d01d61b.png)  
 Thêm dữ liệu vào bảng `book_author`  
-![image](https://user-images.githubusercontent.com/95077178/155107217-eceabf53-797d-4636-b695-0f9db995d90e.png)  
+![image](https://user-images.githubusercontent.com/95077178/155184559-6bf9f4f4-028c-415d-801c-db87c71be892.png)  
 Thêm dữ liệu vào bảng `book_category`  
-![image](https://user-images.githubusercontent.com/95077178/155107388-d891f35d-d72e-456a-ae50-732bfb643107.png)  
-Thêm dữ liệu vào bảng `book_company`  
-![image](https://user-images.githubusercontent.com/95077178/155107486-62cf7765-7b87-41d1-92bc-4c205e8c30e4.png)  
+![image](https://user-images.githubusercontent.com/95077178/155184878-1211106e-15b1-4018-97b4-1d70dcb25159.png)
 Thêm dữ liệu vào bảng `borrowed_notes`  
-![image](https://user-images.githubusercontent.com/95077178/155107612-213fb2a0-041f-4c9a-ab64-e5de84d721ac.png)  
+![image](https://user-images.githubusercontent.com/95077178/155185371-98238749-e444-465a-845f-b2dcadc437b9.png)  
 Thêm dữ liệu vào bảng `borrow_note_book`  
-![image](https://user-images.githubusercontent.com/95077178/155107901-af282e71-1ff3-48aa-9a79-870f9b9fa1a6.png)
+![image](https://user-images.githubusercontent.com/95077178/155185578-7d6ffbf3-2a92-4e4f-ab84-7f6ef8b732df.png)
